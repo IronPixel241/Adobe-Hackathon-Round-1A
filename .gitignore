@@ -49,3 +49,19 @@
 # *.swp
 # *.swo
 # ~$*
+
+training_args.bin
+vocab.txt 
+model.safetensors 
+optimizer.pt 
+rng_state.pth 
+scheduler.pt  
+
+
+
+
+
+
+
+
+model/hub_cache/models--bert-base-uncased/refs/main
