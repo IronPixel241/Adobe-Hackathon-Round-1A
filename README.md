@@ -1,11 +1,26 @@
 # PDF Outline Extractor - Challenge 1a Solution
 
-## Overview
+## How to Run
 
+# Build the Docker image (for linux/amd64)
+docker build --platform linux/amd64 -t my-adobe-solution:final .
+
+# Run the container with mounted input/output directories
+docker run --rm -v "$(pwd)/sample_dataset/pdfs:/app/sample_dataset/pdfs" -v "$(pwd)/sample_dataset/outputs:/app/sample_dataset/outputs" --network none my-adobe-solution:final
+
+# Entry Points
+
+This project uses the following directory structure for processing files:
+
+- **Input**: `/sample_dataset/pdfs`  
+  This is the folder where input PDF files should be placed.
+
+- **Output**: `/sample_dataset/outputs`  
+  This is the folder where the processed output files will be saved.
+
+## Overview
 This project is a robust, high-performance solution for **Challenge 1a of the Adobe India Hackathon 2025.** The primary goal is to parse PDF documents and extract a structured outline, consisting of the document's title and a hierarchical list of headings (H1, H2, H3).
 Bonus: The solution also includes multilingual handling capabilities, with tested support for non-Latin scripts such as Japanese, ensuring robustness across diverse document types.
-
-
 
 The solution is implemented as a self-contained, Dockerized Python application that operates completely offline, adheres to strict performance constraints, and is built for `linux/amd64` architecture as required. It processes all PDF files from a mounted input directory and generates a corresponding JSON file for each in an output directory, conforming to the specified schema.
 
@@ -25,8 +40,6 @@ The first step is to read the PDF and extract all text content. Instead of a sim
 - Font size, name, and weight (boldness)  
 - Page number  
 - Bounding box coordinates (position on the page)
-
-This detailed extraction is crucial for the subsequent heuristic analysis.
 
 ---
 

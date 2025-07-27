@@ -23,8 +23,8 @@ def process_pdf(pdf_path: str):
     return result
 
 if __name__ == "__main__":
-    INPUT_DIR = "/sample_dataset/pdfs"
-    OUTPUT_DIR = "/sample_dataset/outputs"
+    INPUT_DIR = "./sample_dataset/pdfs"
+    OUTPUT_DIR = "./sample_dataset/outputs"
     os.makedirs(INPUT_DIR, exist_ok=True)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
