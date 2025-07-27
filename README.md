@@ -32,6 +32,25 @@ The solution is implemented as a self-contained, Dockerized Python application t
 
 ---
 
+## Directory Structure
+
+```bash
+.
+├── parser/        
+│   ├── config.py          
+│   ├── block_extractor.py  
+│   ├── heuristics.py       
+│   ├── classifier.py       
+│   └── hierarchy_builder.py 
+├── sample_dataset/        
+│   ├── pdfs/               
+│   └── outputs/           
+├── Dockerfile            
+├── process_pdfs.py             
+├── README.md          
+└── requirements.txt
+```
+
 ## Our Approach
 
 To meet the challenge's constraints (speed, no network, no large models), we opted for a **Hybrid Heuristic and Rule-Based Pipeline**. This approach avoids heavy machine learning models in favor of a fast, deterministic, and highly accurate system that analyzes a document's structural and stylistic properties.
