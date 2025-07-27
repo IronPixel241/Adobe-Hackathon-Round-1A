@@ -27,12 +27,13 @@ train_model/__pycache__/
 *.joblib
 *.pkl
 
-# Output files
-output/
-*.json
+# Output files – keep the folder, ignore contents
+/sample_dataset/outputs/*
+!/sample_dataset/outputs/.gitkeep
 
-# PDF inputs
-input/*.pdf
+# PDF inputs – keep the folder, ignore contents
+/sample_dataset/pdfs/*
+!/sample_dataset/pdfs/.gitkeep
 
 # Log files
 *.log

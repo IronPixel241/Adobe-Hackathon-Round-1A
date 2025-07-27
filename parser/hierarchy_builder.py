@@ -1,20 +1,33 @@
-def build_hierarchy(blocks):
-    # Improved title detection: pick top font-size block from page 1
-    first_page_blocks = [b for b in blocks if b['page'] == 1]
+import re
+
+def _clean_heading_text(text):
+    """Final cleaning of heading text before output."""
+    return re.sub(r'\s+', ' ', text).strip()
+
+def build_hierarchy(classified_blocks: list, all_blocks: list):
+    """
+    Builds the final JSON structure from the classified headings,
+    handling title detection and preventing duplicates.
+    """
+    title = "Untitled"
+    first_page_blocks = [b for b in all_blocks if b["page"] == 1]
     if first_page_blocks:
-        top_title_block = max(first_page_blocks, key=lambda x: x['font_size'])
-        title = top_title_block['text'].strip()
-    else:
-        title = ""
+        first_page_blocks.sort(key=lambda b: (b['font_size'], -b['bbox'][1]), reverse=True)
+        title = _clean_heading_text(first_page_blocks[0]['text'])
 
     outline = []
-    for block in blocks:
-        heading_level = block.get("level")
-        if heading_level in ["H1", "H2", "H3", "H4"]:  # H4 now included
+    seen_headings = set()
+
+    for block in classified_blocks:
+        cleaned_text = _clean_heading_text(block['text'])
+        heading_key = (cleaned_text, block['page'])
+
+        if cleaned_text and cleaned_text.lower() != title.lower() and heading_key not in seen_headings:
             outline.append({
-                "level": heading_level,
-                "text": block["text"].strip(),  # keep trailing punctuation
+                "level": block["level"],
+                "text": cleaned_text,
                 "page": block["page"]
             })
+            seen_headings.add(heading_key)
 
     return {"title": title, "outline": outline}
