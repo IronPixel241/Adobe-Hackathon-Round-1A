@@ -2,18 +2,18 @@
 
 ## How to Run
 
-Build and run the container using the commands below:
+### Build Docker Image
 
 ```bash
-# Build the Docker image (for linux/amd64)
 docker build --platform linux/amd64 -t my-adobe-solution:final .
+```
 
-# Run the container with mounted input/output directories
-docker run --rm \
-  -v "$(pwd)/sample_dataset/pdfs:/app/sample_dataset/pdfs" \
-  -v "$(pwd)/sample_dataset/outputs:/app/sample_dataset/outputs" \
-  --network none \
-  my-adobe-solution:final
+### Run the Container
+
+```bash
+docker run --rm -v "$(pwd)/sample_dataset/pdfs:/app/sample_dataset/pdfs" -v "$(pwd)/sample_dataset/outputs:/app/sample_dataset/outputs" --network none my-adobe-solution:final
+```
+
 # Entry Points
 
 This project uses the following directory structure for processing files:
